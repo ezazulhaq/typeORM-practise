@@ -5,13 +5,11 @@ import { User } from "../entities/User";
 export class UserController {
     userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-    constructor() {
-    }
+    constructor() { }
 
     createUser = async (_req: any, _res: any) => {
         const reqBody = _req.body;
-        let user = new User();
-        user = await this.userRepository.save(reqBody);
+        const user = await this.userRepository.save(reqBody);
         _res.status(201).json(user);
     };
 
