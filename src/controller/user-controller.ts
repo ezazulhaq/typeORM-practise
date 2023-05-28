@@ -5,8 +5,6 @@ import { User } from "../entities/User";
 export class UserController {
     userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-    constructor() { }
-
     createUser = async (_req: any, _res: any) => {
         const reqBody = _req.body;
         const user = await this.userRepository.save(reqBody);

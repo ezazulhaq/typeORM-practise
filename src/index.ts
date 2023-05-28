@@ -1,5 +1,4 @@
 import 'reflect-metadata';
-import { User } from './entities/User';
 import express = require('express');
 import { AppRouter } from './routes/route';
 
