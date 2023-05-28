@@ -10,7 +10,11 @@ export class UserController {
     createUser = async (_req: any, _res: any) => {
         const reqBody = _req.body;
         const user = await this.userRepository.save(reqBody);
-        _res.status(201).json(user);
+        if (user)
+            _res.status(201).json(user);
+        else
+            _res.status(500).json({ error: "User Not Created" });
+
     };
 
     getUsers = async (_req: any, _res: any) => {
@@ -21,13 +25,20 @@ export class UserController {
     getUserById = async (_req: any, _res: any) => {
         const userId = _req.params.id;
         const user = await this.userRepository.findOneBy({ id: userId });
-        _res.json(user);
+        if (user)
+            _res.status(200).json(user);
+        else
+            _res.status(500).json({ error: "User Not Found" });
     };
 
     deleteUser = async (_req: any, _res: any) => {
         const userId = _req.params.id;
         const user = await this.userRepository.findOneBy({ id: userId });
-        const result = await this.userRepository.remove(user);
-        _res.status(200).json({ firstName: result.firstName, lastName: result.lastName });
+        if (user) {
+            const result = await this.userRepository.remove(user);
+            _res.status(200).json({ firstName: result.firstName, lastName: result.lastName })
+        }
+        else
+            _res.status(500).json({ error: "User Not Found" });
     };
 }
