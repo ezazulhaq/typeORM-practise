@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import express = require('express');
 import { AppRouter } from './routes/route';
+const express = require('express');
 
 const app = express();
 const port = 3000;

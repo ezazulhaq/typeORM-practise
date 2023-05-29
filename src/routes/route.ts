@@ -1,5 +1,5 @@
 import { UserController } from '../controller/user-controller';
-import express = require('express');
+const express = require('express');
 
 export class AppRouter {
 
